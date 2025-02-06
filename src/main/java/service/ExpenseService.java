@@ -4,7 +4,6 @@ import model.Expense;
 import service.utils.JsonManager;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ExpenseService implements ExpenseRepository{
@@ -23,6 +22,7 @@ public class ExpenseService implements ExpenseRepository{
         expense.setAmount(amount);
         addExpense(expense);
         JsonManager.saveExpenses(expenses);
+        System.out.println("Expense added successfully (ID: " + expense.getId() + ")");
         return expense;
     }
 

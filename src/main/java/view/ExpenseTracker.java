@@ -2,6 +2,7 @@ package view;
 
 import model.Expense;
 import service.ExpenseService;
+import service.utils.ExpenseHandlers;
 
 import java.util.Arrays;
 import java.util.List;
@@ -11,7 +12,7 @@ public class ExpenseTracker {
     public static void main(String[] args) {
         ExpenseService expenseService = new ExpenseService();
 
-        if (args.length < 2) {
+        if (args.length < 1) {
             System.out.println("Usage: java expense-tracker [command]");
             return;
         }
@@ -20,44 +21,16 @@ public class ExpenseTracker {
 
         switch (command) {
             case "add":
-                handleAddExpense(args, expenseService);
+                ExpenseHandlers.handleAddExpense(args, expenseService);
+                break;
+            case "list":
+                ExpenseHandlers.handleListAllExpenses(expenseService);
+                break;
+            case "update", "delete", "summary":
                 break;
             default:
                 System.out.println("Unknown option");
         }
 
-        System.out.println("ID   Date         Description     Amount");
-        for (Expense e : expenseService.listAllExpenses()) {
-            System.out.println(e);
-        }
-    }
-
-    public static void handleAddExpense(String[] args, ExpenseService expenseService) {
-        if (args.length < 4) {
-            System.out.println("Usage: java expense-tracker [command] --description <description> --amount <amount>");
-            return;
-        }
-
-        String description = null, amount = null;
-        ListIterator<String> argsIterator = getArgsIterator(args);
-
-        while (argsIterator.hasNext()) {
-            String arg = argsIterator.next();
-            if (arg.equals("--description") && argsIterator.hasNext()) {
-                description = argsIterator.next();
-            } else if (arg.equals("--amount") && argsIterator.hasNext()) {
-                amount = argsIterator.next();
-            }
-        }
-        if (description == null || amount == null) {
-            System.out.println("Usage: java expense-tracker add --description <description> --amount <amount>");
-            return;
-        }
-        expenseService.createExpense(description, amount);
-    }
-
-    public static ListIterator<String> getArgsIterator(String[] args) {
-        List<String> argList = Arrays.asList(args).subList(1, args.length);
-        return argList.listIterator();
     }
 }
