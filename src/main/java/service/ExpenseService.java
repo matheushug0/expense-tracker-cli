@@ -1,6 +1,7 @@
 package service;
 
 import model.Expense;
+import service.utils.JsonManager;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ public class ExpenseService implements ExpenseRepository{
     private List<Expense> expenses;
 
     public ExpenseService() {
-        this.expenses = new ArrayList<>();
+        this.expenses = JsonManager.loadExpenses();
     }
 
     @Override
@@ -21,6 +22,7 @@ public class ExpenseService implements ExpenseRepository{
         expense.setDescription(description);
         expense.setAmount(amount);
         addExpense(expense);
+        JsonManager.saveExpenses(expenses);
         return expense;
     }
 

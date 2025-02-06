@@ -33,7 +33,6 @@ public class ExpenseTracker {
     }
 
     public static void handleAddExpense(String[] args, ExpenseService expenseService) {
-
         if (args.length < 4) {
             System.out.println("Usage: java expense-tracker [command] --description <description> --amount <amount>");
             return;
@@ -54,9 +53,6 @@ public class ExpenseTracker {
             System.out.println("Usage: java expense-tracker add --description <description> --amount <amount>");
             return;
         }
-
-        System.out.println(description + " " + amount);
-
         expenseService.createExpense(description, amount);
     }
 
