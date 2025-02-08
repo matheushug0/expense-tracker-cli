@@ -1,37 +1,38 @@
 # <img src="https://roadmap.sh/images/gifs/rocket.gif" width="25px"> Expense Tracker CLI
 
-Aplicação com interface de linha de comando CLI(<i>Command Line Interface</i>) para gerenciamento de despesas pessoais.
-<br>Projeto sugerido pelo [Roadmap.sh - **Backend Developer**](https://roadmap.sh/projects/expense-tracker).
-## Features
-- [x] **Adicionar Despesa:** Adiciona uma nova despesa com uma descrição e um valor.
-  - [x] Cadastro da nova despesa e mensagem de retorno no terminal
-  - [x] Armazenamento e Leitura da `Collection` em arquivo JSON
-  - [x] Tratamento de Errors e Exceptions
-  - [x] Adição de restrições de caracteres ao input `ammount`
-- [x] **Atualizar Despesa:** Atualiza a descrição e valor de uma despesa a partir do ID.
-- [x] **Deletar Despesa:** Remove uma despesa pelo ID.
-- [x] **Listar Despesas:** Lista todas as despesas
-- [ ] **Sumário Total das Despesas:** Retorna o valor total das despesas.
-- [ ] **Sumário Mensal das Despesas:** Retorna o valor total das despesas de um mês específico.
-- [ ] **Listar Despesas por Categoria:** Lista as despesas registradas em uma categoria específica.
-  - [ ] Criar uma `enum` e registar as categorias de despesas
-  - [ ] Adicionar o atributo `category` do tipo `enum` na entidade `Expense`
-  - [ ] Atualizar a lógica de cadastro de despesa para o usuário atribuir uma categoria à novas despesas
-  - [ ] Implementar uma função para filtrar a lista de despesas e imprimir de acordo com a categoria desejada
-- [ ] **Definir Orçamento Mensal:** Permite o usuário atribuir um valor limite para despesas, recebendo um alerta quando a soma das despesas exceder o limite
-- [ ] **Exportar Despesas para CSV:** Permitir o usuário exportar as lista de despesas para um arquivo CSV
+A command-line interface (CLI) application for managing personal expenses.  
+<br>  
+Project suggested by [Roadmap.sh - **Backend Developer**](https://roadmap.sh/projects/expense-tracker).
 
-## Instalação
-## Instalação
-1. **Clone o Repositório:**
+## Features
+- [x] **Add Expense:** Adds a new expense with a description and amount.
+  - [x] Registering the new expense and displaying a return message in the terminal.
+  - [x] Storing and reading the `Collection` in a JSON file.
+  - [x] Error and exception handling.
+  - [x] Adding character restrictions to the `amount` input.
+- [x] **Update Expense:** Updates the description and amount of an expense based on its ID.
+- [x] **Delete Expense:** Removes an expense by its ID.
+- [x] **List Expenses:** Lists all expenses.
+- [ ] **Total Expense Summary:** Returns the total amount of expenses.
+- [ ] **Monthly Expense Summary:** Returns the total amount of expenses for a specific month.
+- [ ] **List Expenses by Category:** Lists expenses registered under a specific category.
+  - [ ] Create an `enum` and register expense categories.
+  - [ ] Add the `category` attribute of type `enum` to the `Expense` entity.
+  - [ ] Update the expense registration logic to allow the user to assign a category to new expenses.
+  - [ ] Implement a function to filter the list of expenses and print them according to the desired category.
+- [ ] **Set Monthly Budget:** Allows the user to set a spending limit and receive an alert when the total expenses exceed the limit.
+- [ ] **Export Expenses to CSV:** Allows the user to export the list of expenses to a CSV file.
+
+## Installation
+1. **Clone the Repository:**
 ```bash
 git clone https://github.com/matheushug0/expense-tracker-cli.git
 ```
-2. **Faça o build do projeto Maven (versão mínima recomendada: 3.6.3):**
+2. **Build the Maven Project (minimum recommended version: 3.6.3):**
 ```bash
 mvn clean package install
 ```
-3. **Execute a aplicação:**
+3. **Run the Application:**
 ```bash
 java target/expense-tracker-cli [command]
 ```
