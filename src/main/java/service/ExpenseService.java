@@ -32,13 +32,33 @@ public class ExpenseService implements ExpenseRepository{
     }
 
     @Override
-    public void updateExpense(Expense expense) {
-
+    public void updateExpense(Integer id, String description, String amount) {
+        Expense expense = expenses.get(id - 1);
+        if(expense != null) {
+            expense.setDescription(description);
+            expense.setAmount(amount);
+            JsonManager.saveExpenses(expenses);
+            System.out.println("Expense updated successfully (ID: " + expense.getId() + ")");
+        }else {
+            System.out.println("Expense not found");
+        }
     }
 
     @Override
-    public void deleteExpense(Expense expense) {
+    public void deleteExpense(Integer id) {
+        if(expenses.isEmpty()){
+            System.out.println("Expense List is empty");
+            return;
+        }
 
+        if(expenses.get(id - 1) != null) {
+            Expense expense = expenses.get(id - 1);
+            expenses.remove(expense);
+            System.out.println("Expense deleted successfully (ID: " + expense.getId() + ")");
+            JsonManager.saveExpenses(expenses);
+        }else {
+            System.out.println("Expense not found");
+        }
     }
 
     @Override

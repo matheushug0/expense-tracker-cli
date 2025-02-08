@@ -8,8 +8,8 @@ Aplicação com interface de linha de comando CLI(<i>Command Line Interface</i>)
   - [x] Armazenamento e Leitura da `Collection` em arquivo JSON
   - [x] Tratamento de Errors e Exceptions
   - [x] Adição de restrições de caracteres ao input `ammount`
-- [ ] **Atualizar Despesa:** Atualiza a descrição e valor de uma despesa a partir do ID.
-- [ ] **Deletar Despesa:** Remove uma despesa pelo ID.
+- [x] **Atualizar Despesa:** Atualiza a descrição e valor de uma despesa a partir do ID.
+- [x] **Deletar Despesa:** Remove uma despesa pelo ID.
 - [x] **Listar Despesas:** Lista todas as despesas
 - [ ] **Sumário Total das Despesas:** Retorna o valor total das despesas.
 - [ ] **Sumário Mensal das Despesas:** Retorna o valor total das despesas de um mês específico.

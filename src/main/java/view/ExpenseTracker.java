@@ -1,12 +1,7 @@
 package view;
 
-import model.Expense;
 import service.ExpenseService;
 import service.utils.ExpenseHandlers;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.ListIterator;
 
 public class ExpenseTracker {
     public static void main(String[] args) {
@@ -26,7 +21,11 @@ public class ExpenseTracker {
             case "list":
                 ExpenseHandlers.handleListAllExpenses(expenseService);
                 break;
-            case "update", "delete", "summary":
+            case "update":
+                ExpenseHandlers.handleUpdateExpense(args, expenseService);
+                break;
+            case "delete":
+                ExpenseHandlers.handleDeleteExpense(args, expenseService);
                 break;
             default:
                 System.out.println("Unknown option");
