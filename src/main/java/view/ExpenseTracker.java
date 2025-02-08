@@ -16,7 +16,7 @@ public class ExpenseTracker {
 
         switch (command) {
             case "add":
-                ExpenseHandlers.handleAddExpense(args, expenseService);
+                ExpenseHandlers.handleCreateExpense(args, expenseService);
                 break;
             case "list":
                 ExpenseHandlers.handleListAllExpenses(expenseService);
@@ -26,6 +26,9 @@ public class ExpenseTracker {
                 break;
             case "delete":
                 ExpenseHandlers.handleDeleteExpense(args, expenseService);
+                break;
+            case "summary":
+                ExpenseHandlers.handleSummaryExpense(args, expenseService);
                 break;
             default:
                 System.out.println("Unknown option");

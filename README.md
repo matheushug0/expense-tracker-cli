@@ -13,8 +13,8 @@ Project suggested by [Roadmap.sh - **Backend Developer**](https://roadmap.sh/pro
 - [x] **Update Expense:** Updates the description and amount of an expense based on its ID.
 - [x] **Delete Expense:** Removes an expense by its ID.
 - [x] **List Expenses:** Lists all expenses.
-- [ ] **Total Expense Summary:** Returns the total amount of expenses.
-- [ ] **Monthly Expense Summary:** Returns the total amount of expenses for a specific month.
+- [x] **Total Expense Summary:** Returns the total amount of expenses.
+- [x] **Monthly Expense Summary:** Returns the total amount of expenses for a specific month.
 - [ ] **List Expenses by Category:** Lists expenses registered under a specific category.
   - [ ] Create an `enum` and register expense categories.
   - [ ] Add the `category` attribute of type `enum` to the `Expense` entity.
