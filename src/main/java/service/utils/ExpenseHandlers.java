@@ -16,7 +16,7 @@ public class ExpenseHandlers {
 
     public static void handleCreateExpense(String[] args, ExpenseService expenseService) {
         if (args.length < 4) {
-            System.out.println("Usage: java expense-tracker add --description <description> --amount <amount> --category <category>");
+            System.out.println("Usage: java expense-tracker-cli-1.0 add --description <description> --amount <amount> --category <category>");
             return;
         }
 
@@ -35,7 +35,7 @@ public class ExpenseHandlers {
             }
         }
         if (description == null || amount == null || !amount.matches("\\d+[,.]\\d{2}") || (category < 0 || category > 6)) {
-            System.out.println("Usage: java expense-tracker add --description Lunch --amount 9,99 --category 1");
+            System.out.println("Usage: java expense-tracker-cli-1.0 add --description Lunch --amount 9,99 --category 1");
             System.out.println("Categories:\n" +
                     "0 - Other\n" +
                     "1 - Food\n" +
@@ -50,11 +50,11 @@ public class ExpenseHandlers {
 
     public static void handleUpdateExpense(String[] args, ExpenseService expenseService) {
         if (args.length < 7) {
-            System.out.println("Usage: java expense-tracker update --id <ID> --description <description> --amount <amount> --category <category>");
+            System.out.println("Usage: java expense-tracker-cli-1.0 update --id <ID> --description <description> --amount <amount> --category <category>");
             return;
         }
         Integer id = null;
-        int category = 0;
+        Integer category = null;
         String description, amount;
         description = amount = null;
         ListIterator<String> argsIterator = getArgsIterator(args);
@@ -70,8 +70,8 @@ public class ExpenseHandlers {
                 category = Integer.parseInt(argsIterator.next());
             }
         }
-        if (id == null || description == null || amount == null || !amount.matches("\\d+[,.]\\d{2}") || (category < 0 || category > 6)) {
-            System.out.println("Usage: java expense-tracker update --id 1 --description Dinner --amount 9,99 --category 1");
+        if (id == null || description == null || amount == null || !amount.matches("\\d+[,.]\\d{2}") || (category != null && (category < 0 || category > 6))) {
+            System.out.println("Usage: java expense-tracker-cli-1.0 update --id 1 --description Dinner --amount 9,99 --category 1");
             System.out.println("Categories:\n" +
                     "0 - Other\n" +
                     "1 - Food\n" +
@@ -86,7 +86,7 @@ public class ExpenseHandlers {
 
     public static void handleDeleteExpense(String[] args, ExpenseService expenseService) {
         if (args.length < 3) {
-            System.out.println("Usage: java expense-tracker delete --id <ID>");
+            System.out.println("Usage: java expense-tracker-cli-1.0 delete --id <ID>");
             return;
         }
         Integer id = null;
@@ -98,7 +98,7 @@ public class ExpenseHandlers {
             }
         }
         if (id == null) {
-            System.out.println("Usage: java expense-tracker delete --id 1");
+            System.out.println("Usage: java expense-tracker-cli-1.0 delete --id 1");
         }
         expenseService.deleteExpense(id);
     }
@@ -149,11 +149,11 @@ public class ExpenseHandlers {
             }
         }
         if (month == null) {
-            System.out.println("Usage: java expense-tracker sumary --month <month>");
+            System.out.println("Usage: java expense-tracker-cli-1.0 sumary --month <month>");
             return;
         }
         if (month < 1 || month > 12) {
-            System.out.println("Usage: java expense-tracker summary --month 8");
+            System.out.println("Usage: java expense-tracker-cli-1.0 summary --month 8");
             return;
         }
         for (Expense e : expenseService.listAllExpenses()) {
@@ -177,7 +177,7 @@ public class ExpenseHandlers {
         }
 
         if (args.length < 3) {
-            System.out.println("Usage: java expense-tracker budget --amount <amount>");
+            System.out.println("Usage: java expense-tracker-cli-1.0 budget --amount <amount>");
             return;
         }
         Iterator<String> argsIterator = getArgsIterator(args);
@@ -189,13 +189,18 @@ public class ExpenseHandlers {
             }
         }
         if (amount == null || !amount.matches("\\d+[,.]\\d{2}")) {
-            System.out.println("Usage: java expense-tracker budget --amount 1000,00");
+            System.out.println("Usage: java expense-tracker-cli-1.0 budget --amount 1000,00");
             return;
         }
         expenseService.setBudget(amount);
     }
 
     public static void handleClearExpenses(ExpenseService expenseService) {
+        if(expenseService.listAllExpenses().isEmpty()) {
+            System.out.println("Expense list is empty");
+            return;
+        }
+
         Scanner scanner = new Scanner(System.in);
         System.out.print("Are you sure? [Y/n]: ");
         String answer = scanner.next().toLowerCase();

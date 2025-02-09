@@ -8,7 +8,7 @@ public class ExpenseTracker {
         ExpenseService expenseService = new ExpenseService();
 
         if (args.length < 1) {
-            System.out.println("Usage: java expense-tracker [command]");
+            System.out.println("Usage: java expense-tracker-cli-1.0 [command]");
             return;
         }
 

@@ -38,16 +38,7 @@ public class ExpenseService implements ExpenseRepository {
     @Override
     public void addExpense(Expense expense) {
         expenses.add(expense);
-        BigDecimal total = expenses.stream().map(Expense::getAmount).reduce(BigDecimal.ZERO, BigDecimal::add);
-        try {
-            BigDecimal budget = this.budget.getFirst();
-            if(budget.compareTo(total) < 0) {
-                System.out.println("You have exceeded the monthly budget");
-                System.out.println("Monthly Budget: " + budget + "\nTotal Expenses: " + total);
-            }
-        }catch (Exception e) {
-            System.out.println("You didn't set a budget to your expenses");
-        }
+        updateBudget();
     }
 
     @Override
@@ -58,12 +49,12 @@ public class ExpenseService implements ExpenseRepository {
         }
         if (expenses.get(id - 1) != null) {
             Expense expense = expenses.get(id - 1);
-            System.out.println("Category ID: " + expense.getCategory().getId() + ", Category: " + category);
             expense.setDescription(description);
-            if (expense.getCategory().getId() > 0 && category > 0) {
+            if (category != null && expense.getCategory().getId() != category) {
                 expense.setCategory(Category.fromId(category));
             }
             expense.setAmount(amount);
+            updateBudget();
             JsonManager.saveExpenses(expenses);
             System.out.println("Expense updated successfully (ID: " + expense.getId() + ")");
         } else {
@@ -101,6 +92,19 @@ public class ExpenseService implements ExpenseRepository {
             System.out.println("Budget set successfully to $" + budget);
         }
         JsonManager.saveBudget(this.budget);
+    }
+
+    public void updateBudget(){
+        BigDecimal total = expenses.stream().map(Expense::getAmount).reduce(BigDecimal.ZERO, BigDecimal::add);
+        try {
+            BigDecimal budget = this.budget.getFirst();
+            if(budget.compareTo(total) < 0) {
+                System.out.println("You have exceeded the monthly budget");
+                System.out.println("Monthly Budget: " + budget + "\nTotal Expenses: " + total);
+            }
+        }catch (Exception e) {
+            System.out.println("You didn't set a budget to your expenses");
+        }
     }
 
     public List<BigDecimal> getBudget() {

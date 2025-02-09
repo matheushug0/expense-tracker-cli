@@ -4,7 +4,7 @@
   <groupId>br.com.mh</groupId>
   <artifactId>expense-tracker-cli</artifactId>
   <name>Archetype - expense-tracker-cli</name>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0</version>
   <url>http://maven.apache.org</url>
   <build>
     <plugins>
