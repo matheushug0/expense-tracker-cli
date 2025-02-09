@@ -31,6 +31,7 @@ git clone https://github.com/matheushug0/expense-tracker-cli.git
 ```
 2. **Build the Maven Project (minimum recommended version: 3.6.3):**
 ```bash
+cd expense-tracker-cli/
 mvn clean package install
 ```
 3. **Run the Application:**
