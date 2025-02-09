@@ -12,6 +12,7 @@ Project suggested by [Roadmap.sh - **Backend Developer**](https://roadmap.sh/pro
   - [x] Adding character restrictions to the `amount` input.
 - [x] **Update Expense:** Updates the description and amount of an expense based on its ID.
 - [x] **Delete Expense:** Removes an expense by its ID.
+- [x] **Clear Expenses:** Clear all expenses from the list.
 - [x] **List Expenses:** Lists all expenses.
 - [x] **Total Expense Summary:** Returns the total amount of expenses.
 - [x] **Monthly Expense Summary:** Returns the total amount of expenses for a specific month.
@@ -21,7 +22,7 @@ Project suggested by [Roadmap.sh - **Backend Developer**](https://roadmap.sh/pro
   - [x] Update the expense registration logic to allow the user to assign a category to new expenses.
   - [x] Implement a function to filter the list of expenses and print them according to the desired category.
 - [x] **Set Monthly Budget:** Allows the user to set a spending limit and receive an alert when the total expenses exceed the limit.
-- [ ] **Export Expenses to CSV:** Allows the user to export the list of expenses to a CSV file.
+- [x] **Export Expenses to CSV:** Allows the user to export the list of expenses to a CSV file.
 
 ## Installation
 1. **Clone the Repository:**

@@ -106,4 +106,9 @@ public class ExpenseService implements ExpenseRepository {
     public List<BigDecimal> getBudget() {
         return budget;
     }
+
+    public void clearExpenses() {
+        expenses.clear();
+        JsonManager.saveExpenses(expenses);
+    }
 }

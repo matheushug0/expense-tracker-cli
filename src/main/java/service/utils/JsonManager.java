@@ -15,6 +15,7 @@ import java.util.List;
 public class JsonManager {
     private static final String EXPENSE_JSON = "expenses.json";
     private static final String BUDGET_JSON = "budget.json";
+    private static final String EXPENSES_CSV = "expenses.csv";
     private static final Gson GSON = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter()).setPrettyPrinting().create();
 
     public static void saveExpenses(List<Expense> expenses) {
@@ -70,6 +71,31 @@ public class JsonManager {
             return (budget != null) ? budget : new ArrayList<>();
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    public static void exportToCsv(List<Expense> expenses) {
+
+        if(expenses.isEmpty()) {
+            System.out.println("Expenses list is empty");
+            return;
+        }
+
+        try(FileWriter fileWriter = new FileWriter(EXPENSES_CSV)){
+            fileWriter.append("ID,Description,Category,Amount\n");
+            BigDecimal total = BigDecimal.ZERO;
+            for(Expense e: expenses){
+                total = total.add(e.getAmount());
+                fileWriter.append(String.valueOf(e.getId())).append(",")
+                        .append(e.getDescription()).append(",")
+                        .append(e.getCategory().getName()).append(",")
+                        .append(String.valueOf(e.getAmount()))
+                        .append("\n");
+            }
+            fileWriter.append(",").append(",").append("TOTAL").append(",").append(total.toString());
+            System.out.println("CSV File exported with success to: " + EXPENSES_CSV);
+        } catch (IOException e) {
+            System.out.println("Error while exporting expenses to CSV: " + e.getMessage());
         }
     }
 }

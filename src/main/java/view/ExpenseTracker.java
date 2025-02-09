@@ -33,9 +33,14 @@ public class ExpenseTracker {
             case "budget":
                 ExpenseHandlers.handleSaveBugdget(args, expenseService);
                 break;
+            case "csv":
+                ExpenseHandlers.handleExportCsv(expenseService);
+                break;
+            case "clear":
+                ExpenseHandlers.handleClearExpenses(expenseService);
+                break;
             default:
                 System.out.println("Unknown option");
         }
-
     }
 }

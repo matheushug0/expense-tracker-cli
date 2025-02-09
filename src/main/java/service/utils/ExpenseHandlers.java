@@ -194,4 +194,18 @@ public class ExpenseHandlers {
         }
         expenseService.setBudget(amount);
     }
+
+    public static void handleClearExpenses(ExpenseService expenseService) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Are you sure? [Y/n]: ");
+        String answer = scanner.next().toLowerCase();
+        if (answer.equals("y")) {
+            expenseService.clearExpenses();
+            System.out.println("Expense list has been cleared");
+        }
+    }
+
+    public static void handleExportCsv(ExpenseService expenseService) {
+        JsonManager.exportToCsv(expenseService.listAllExpenses());
+    }
 }
