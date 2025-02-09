@@ -30,7 +30,7 @@ public class ExpenseHandlers {
                 description = argsIterator.next();
             } else if (arg.equals("--amount") && argsIterator.hasNext()) {
                 amount = argsIterator.next().replace(",", ".");
-            } else if(arg.equals("--category") && argsIterator.hasNext()) {
+            } else if (arg.equals("--category") && argsIterator.hasNext()) {
                 category = Integer.parseInt(argsIterator.next());
             }
         }
@@ -66,7 +66,7 @@ public class ExpenseHandlers {
                 description = argsIterator.next();
             } else if (arg.equals("--amount") && argsIterator.hasNext()) {
                 amount = argsIterator.next().replace(",", ".");
-            } else if(arg.equals("--category") && argsIterator.hasNext()) {
+            } else if (arg.equals("--category") && argsIterator.hasNext()) {
                 category = Integer.parseInt(argsIterator.next());
             }
         }
@@ -112,12 +112,12 @@ public class ExpenseHandlers {
         Integer category = null;
         while (argsIterator.hasNext()) {
             String arg = argsIterator.next();
-            if(arg.equals("--category") && argsIterator.hasNext()) {
+            if (arg.equals("--category") && argsIterator.hasNext()) {
                 category = Integer.parseInt(argsIterator.next());
             }
         }
 
-        if(category != null) {
+        if (category != null) {
             System.out.println("ID   Date         Description     Category        Amount");
             Integer finalCategory = category;
             expenseService.listAllExpenses().stream().filter(e -> e.getCategory().getId() == finalCategory).forEach(System.out::println);
@@ -163,5 +163,35 @@ public class ExpenseHandlers {
         }
         System.out.println("Total expenses for " + Month.of(month).getDisplayName(TextStyle.FULL, Locale.ENGLISH) + ": $" + summary);
 
+    }
+
+    public static void handleSaveBugdget(String[] args, ExpenseService expenseService) {
+        if (args.length < 2) {
+            try {
+                BigDecimal budget = expenseService.getBudget().getFirst();
+                System.out.println(budget);
+            }catch (Exception e) {
+                System.out.println("No budget has been set yet");
+            }
+            return;
+        }
+
+        if (args.length < 3) {
+            System.out.println("Usage: java expense-tracker budget --amount <amount>");
+            return;
+        }
+        Iterator<String> argsIterator = getArgsIterator(args);
+        String amount = null;
+        while (argsIterator.hasNext()) {
+            String arg = argsIterator.next();
+            if (arg.equals("--amount") && argsIterator.hasNext()) {
+                amount = argsIterator.next().replace(",", ".");
+            }
+        }
+        if (amount == null || !amount.matches("\\d+[,.]\\d{2}")) {
+            System.out.println("Usage: java expense-tracker budget --amount 1000,00");
+            return;
+        }
+        expenseService.setBudget(amount);
     }
 }

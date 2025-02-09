@@ -4,14 +4,18 @@ import model.Category;
 import model.Expense;
 import service.utils.JsonManager;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ExpenseService implements ExpenseRepository {
     private List<Expense> expenses;
+    private List<BigDecimal> budget;
 
     public ExpenseService() {
         this.expenses = JsonManager.loadExpenses();
+        this.budget = JsonManager.loadBudget();
     }
 
     @Override
@@ -34,6 +38,16 @@ public class ExpenseService implements ExpenseRepository {
     @Override
     public void addExpense(Expense expense) {
         expenses.add(expense);
+        BigDecimal total = expenses.stream().map(Expense::getAmount).reduce(BigDecimal.ZERO, BigDecimal::add);
+        try {
+            BigDecimal budget = this.budget.getFirst();
+            if(budget.compareTo(total) < 0) {
+                System.out.println("You have exceeded the monthly budget");
+                System.out.println("Monthly Budget: " + budget + "\nTotal Expenses: " + total);
+            }
+        }catch (Exception e) {
+            System.out.println("You didn't set a budget to your expenses");
+        }
     }
 
     @Override
@@ -77,5 +91,19 @@ public class ExpenseService implements ExpenseRepository {
     @Override
     public List<Expense> listAllExpenses() {
         return expenses;
+    }
+
+    public void setBudget(String budget){
+        if(budget == null || budget.isEmpty()){
+            this.budget.add(BigDecimal.ZERO);
+        }else {
+            this.budget.add(BigDecimal.valueOf(Double.parseDouble(budget)));
+            System.out.println("Budget set successfully to $" + budget);
+        }
+        JsonManager.saveBudget(this.budget);
+    }
+
+    public List<BigDecimal> getBudget() {
+        return budget;
     }
 }

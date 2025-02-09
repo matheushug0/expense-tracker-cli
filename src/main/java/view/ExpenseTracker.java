@@ -30,6 +30,9 @@ public class ExpenseTracker {
             case "summary":
                 ExpenseHandlers.handleSummaryExpense(args, expenseService);
                 break;
+            case "budget":
+                ExpenseHandlers.handleSaveBugdget(args, expenseService);
+                break;
             default:
                 System.out.println("Unknown option");
         }
