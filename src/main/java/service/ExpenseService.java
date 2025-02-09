@@ -15,7 +15,7 @@ public class ExpenseService implements ExpenseRepository {
     }
 
     @Override
-    public Expense createExpense(String description, Integer category, String amount) {
+    public void createExpense(String description, Integer category, String amount) {
         Expense expense = new Expense();
         expense.setId(expenses.size() + 1);
         expense.setDate(LocalDateTime.now());
@@ -29,7 +29,6 @@ public class ExpenseService implements ExpenseRepository {
         addExpense(expense);
         JsonManager.saveExpenses(expenses);
         System.out.println("Expense added successfully (ID: " + expense.getId() + ")");
-        return expense;
     }
 
     @Override

@@ -19,7 +19,7 @@ public class ExpenseTracker {
                 ExpenseHandlers.handleCreateExpense(args, expenseService);
                 break;
             case "list":
-                ExpenseHandlers.handleListAllExpenses(expenseService);
+                ExpenseHandlers.handleListAllExpenses(args, expenseService);
                 break;
             case "update":
                 ExpenseHandlers.handleUpdateExpense(args, expenseService);

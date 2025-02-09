@@ -103,11 +103,27 @@ public class ExpenseHandlers {
         expenseService.deleteExpense(id);
     }
 
-    public static void handleListAllExpenses(ExpenseService expenseService) {
+    public static void handleListAllExpenses(String[] args, ExpenseService expenseService) {
         if (expenseService.listAllExpenses().isEmpty()) {
             System.out.println("Expense list is empty");
             return;
         }
+        Iterator<String> argsIterator = getArgsIterator(args);
+        Integer category = null;
+        while (argsIterator.hasNext()) {
+            String arg = argsIterator.next();
+            if(arg.equals("--category") && argsIterator.hasNext()) {
+                category = Integer.parseInt(argsIterator.next());
+            }
+        }
+
+        if(category != null) {
+            System.out.println("ID   Date         Description     Category        Amount");
+            Integer finalCategory = category;
+            expenseService.listAllExpenses().stream().filter(e -> e.getCategory().getId() == finalCategory).forEach(System.out::println);
+            return;
+        }
+
         System.out.println("ID   Date         Description     Category        Amount");
         for (Expense e : expenseService.listAllExpenses()) {
             System.out.println(e);

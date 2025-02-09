@@ -19,7 +19,7 @@ Project suggested by [Roadmap.sh - **Backend Developer**](https://roadmap.sh/pro
   - [x] Create an `enum` and register expense categories.
   - [x] Add the `category` attribute of type `enum` to the `Expense` entity.
   - [x] Update the expense registration logic to allow the user to assign a category to new expenses.
-  - [ ] Implement a function to filter the list of expenses and print them according to the desired category.
+  - [x] Implement a function to filter the list of expenses and print them according to the desired category.
 - [ ] **Set Monthly Budget:** Allows the user to set a spending limit and receive an alert when the total expenses exceed the limit.
 - [ ] **Export Expenses to CSV:** Allows the user to export the list of expenses to a CSV file.
 
