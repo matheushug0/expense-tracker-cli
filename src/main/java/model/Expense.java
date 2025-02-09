@@ -9,6 +9,7 @@ public class Expense {
     private String description;
     private BigDecimal amount;
     private LocalDateTime date;
+    private Category category;
 
     public Expense() {
     }
@@ -45,9 +46,17 @@ public class Expense {
         this.date = date;
     }
 
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        return String.format("%-4d %-12s %-15s $%.2f", id, date.format(formatter), description, amount);
+        return String.format("%-4d %-12s %-15s %-15s $%.2f", id, date.format(formatter), description, category.getName(), amount);
     }
 }
