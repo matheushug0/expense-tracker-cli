@@ -43,56 +43,56 @@ java expense-tracker-cli-1.0 [command]
 ## Usage
 ```bash
 - Add new expense
-java expense-tracker-cli-1.0 add --description Dinner --amount 19,99 --category 0
+java expense-tracker-cli-1.0.jar add --description Dinner --amount 19,99 --category 0
 # You didn't set a budget to your expenses
 # Expense added successfully (ID: 1)
 
 - Update expense
-java expense-tracker-cli-1.0 update --id 1 --description Dinner --amount 19,99 --category 1
+java expense-tracker-cli-1.0.jar update --id 1 --description Dinner --amount 19,99 --category 1
 # You didn't set a budget to your expenses
 # Expense updated successfully (ID: 1)
 
 - Check budget
-java expense-tracker-cli-1.0 budget
+java expense-tracker-cli-1.0.jar budget
 # No budget has been set yet
 
 - Set a budget
-java expense-tracker-cli-1.0 budget --amount 1000,00
+java expense-tracker-cli-1.0.jar budget --amount 1000,00
 # Budget set successfully to $1000.00
 
 - List all expenses
-java expense-tracker-cli-1.0 list
+java expense-tracker-cli-1.0.jar list
 # ID   Date         Description     Category        Amount
 # 1    09-02-2025   Dinner          Food            $29,99
 
 - List expenses by month
-java expense-tracker-cli-1.0 list --month 2
+java expense-tracker-cli-1.0.jar list --month 2
 # ID   Date         Description     Category        Amount
 # 1    09-02-2025   Dinner          Food            $29,99
 
 - List expenses by category
-java expense-tracker-cli-1.0 list --category 1
+java expense-tracker-cli-1.0.jar list --category 1
 # ID   Date         Description     Category        Amount
 # 1    09-02-2025   Dinner          Food            $29,99
 
 - Summary
-java expense-tracker-cli-1.0 summary
+java expense-tracker-cli-1.0.jar summary
 # Total expenses: $29.99
 
 - Summary by month
-java expense-tracker-cli-1.0 summary --month 2
+java expense-tracker-cli-1.0.jar summary --month 2
 # Total expenses for February: $29.99
 
 - Export to CSV
-java expense-tracker-cli-1.0 csv
+java expense-tracker-cli-1.0.jar csv
 # CSV File exported with success to: expenses.csv
 
 - Delete Expense
-java expense-tracker-cli-1.0 delete --id 1
+java expense-tracker-cli-1.0.jar delete --id 1
 # Expense deleted successfully (ID: 1)
 
 - Clear Expenses
-java expense-tracker-cli-1.0 clear
+java expense-tracker-cli-1.0.jar clear
 # Are you sure? [Y/n]: y
 # Expense list has been cleared
 ```
