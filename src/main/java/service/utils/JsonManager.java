@@ -9,6 +9,7 @@ import java.io.*;
 import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,6 +76,7 @@ public class JsonManager {
     }
 
     public static void exportToCsv(List<Expense> expenses) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
         if(expenses.isEmpty()) {
             System.out.println("Expenses list is empty");
@@ -82,17 +84,18 @@ public class JsonManager {
         }
 
         try(FileWriter fileWriter = new FileWriter(EXPENSES_CSV)){
-            fileWriter.append("ID,Description,Category,Amount\n");
+            fileWriter.append("ID,Date,Description,Category,Amount\n");
             BigDecimal total = BigDecimal.ZERO;
             for(Expense e: expenses){
                 total = total.add(e.getAmount());
                 fileWriter.append(String.valueOf(e.getId())).append(",")
+                        .append(String.valueOf(e.getDate().format(formatter))).append(",")
                         .append(e.getDescription()).append(",")
                         .append(e.getCategory().getName()).append(",")
                         .append(String.valueOf(e.getAmount()))
                         .append("\n");
             }
-            fileWriter.append(",").append(",").append("TOTAL").append(",").append(total.toString());
+            fileWriter.append(",").append(",").append(",").append("TOTAL").append(",").append(total.toString());
             System.out.println("CSV File exported with success to: " + EXPENSES_CSV);
         } catch (IOException e) {
             System.out.println("Error while exporting expenses to CSV: " + e.getMessage());

@@ -113,6 +113,8 @@ public class ExpenseService implements ExpenseRepository {
 
     public void clearExpenses() {
         expenses.clear();
+        budget.clear();
         JsonManager.saveExpenses(expenses);
+        JsonManager.saveBudget(budget);
     }
 }
